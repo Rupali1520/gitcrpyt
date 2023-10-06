@@ -1,0 +1,68 @@
+- defaultTab: nodes
+  description: ''
+  executionEnabled: true
+  id: caac6e6b-eb42-48dd-bac8-8f1fe10b8690
+  loglevel: INFO
+  name: job3
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: remote-node
+  nodesSelectedByDefault: true
+  notification:
+    onfailure:
+      plugin:
+        configuration:
+          slack_channel: general
+          webhook_base_url: https://hooks.slack.com/services
+          webhook_token: T05RE7HMUPN/B05UZ6SR8E8/1LxCTpVE866XDN9j5XpLXWYJ
+        type: SlackNotification
+    onstart:
+      plugin:
+        configuration:
+          slack_channel: genral
+          webhook_base_url: https://hooks.slack.com/services
+          webhook_token: T05RE7HMUPN/B05R8UYPNH3/JPXW1I2G632aFLsjCeXMLA3v
+        type: SlackNotification
+    onsuccess:
+      plugin:
+        configuration:
+          slack_channel: general
+          webhook_base_url: https://hooks.slack.com/services
+          webhook_token: T05RE7HMUPN/B05UZ6SR8E8/1LxCTpVE866XDN9j5XpLXWYJ
+        type: SlackNotification
+  notifyAvgDurationThreshold: null
+  plugins:
+    ExecutionLifecycle: null
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - description: first step
+      exec: pwd
+    - configuration:
+        ansible-base-dir-path: /etc/ansible/
+        ansible-become: 'true'
+        ansible-playbook-inline: |-
+          - name: test playbook
+            hosts: all
+            tasks:
+              - shell: uname -a
+                ignore_errors: yes
+                register: uname_result
+              - debug: msg="{{ uname_result.stdout }}"
+        ansible-ssh-auth-type: privateKey
+        ansible-ssh-key-storage-path: keys/aws-ec2
+        ansible-ssh-passphrase-option: option.password
+        ansible-ssh-use-agent: 'true'
+        ansible-ssh-user: ubuntu
+      nodeStep: true
+      type: com.batix.rundeck.plugins.AnsiblePlaybookInlineWorkflowNodeStep
+    keepgoing: false
+    strategy: node-first
+  uuid: caac6e6b-eb42-48dd-bac8-8f1fe10b8690
+

@@ -1,0 +1,27 @@
+- defaultTab: nodes
+  description: ''
+  executionEnabled: true
+  id: 633f5c33-51f7-445e-8ea1-f761940b80e6
+  loglevel: INFO
+  name: job2
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: remote-node
+  nodesSelectedByDefault: true
+  plugins:
+    ExecutionLifecycle: null
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - description: first step
+      exec: pwd
+    keepgoing: false
+    strategy: node-first
+  uuid: 633f5c33-51f7-445e-8ea1-f761940b80e6
+
